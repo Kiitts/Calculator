@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace Calculator
 {
@@ -22,9 +23,30 @@ namespace Calculator
         public double previewCalculated = 0;
         public double calculatedAnswer = 0;
         public double lastNumber = 0;
-
+        public ArrayList paranLastValue = new ArrayList();
+        public ArrayList paranOperations = new ArrayList();
+        public int paranCounter = 0;
         public bool needChange = false;
 
+        private void reset()
+        {
+            newVal = false;
+            equalAgain = false;
+            previewHolder = string.Empty;
+            numberNegative = false;
+            operation = string.Empty;
+            newCalculated = 0;
+            previewCalculated = 0;
+            lastNumber = 0;
+            preview1.Text = "0";
+            preview2.Text = null;
+            paranCounter = 0;
+            for (int i = paranLastValue.Count; i != 0; i--)
+            {
+                paranLastValue.RemoveAt(paranLastValue.Count - 1);
+                paranOperations.RemoveAt(paranOperations.Count - 1);
+            }
+        }
         // erasing buttons
         private void eraseButton_Click(object sender, EventArgs e)
         {
@@ -40,11 +62,9 @@ namespace Calculator
                 if (equalAgain)
                 {
                     // if recently equal
-                    preview2.Text = null;
-                    newCalculated = 0;
-                    numberNegative = false;
-                    operation = string.Empty;
-                    equalAgain = false;
+                    string hold = preview1.Text;
+                    reset();
+                    preview1.Text = hold;
                 }
                 else
                 {
@@ -60,17 +80,7 @@ namespace Calculator
             if (clearButton.Text == "C")
             {
                 // this will clear all the data been made in calculator
-                newVal = false;
-                equalAgain = false;
-                previewHolder = string.Empty;
-                operation = string.Empty;
-                numberNegative = false;
-                preview2Holder = string.Empty;
-                newCalculated = 0;
-                previewCalculated = 0;
-                lastNumber = 0;
-                preview1.Text = "0";
-                preview2.Text = null;
+                reset();
             }
             else
             {
@@ -171,10 +181,8 @@ namespace Calculator
         }
 
         // numerical buttons
-
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonPressed(string selectedNumber)
         {
-            // add 1 in preview1
             if (preview1.Text == "0" || newVal || equalAgain)
             {
                 if (newVal)
@@ -192,212 +200,64 @@ namespace Calculator
                 preview1.Text = null;
                 equalAgain = false;
             }
-            preview1.Text += "1";
+            preview1.Text += selectedNumber;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // add 1 in preview1
+            ButtonPressed("1");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             // add 2 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "2";
+            ButtonPressed("2");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             // add 3 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "3";
+            ButtonPressed("3");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             // add 4 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "4";
+            ButtonPressed("4");
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             // add 5 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "5";
+            ButtonPressed("5");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             // add 6 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "6";
+            ButtonPressed("6");
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             // add 7 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "7";
+            ButtonPressed("7");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             // add 8 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "8";
+            ButtonPressed("8");
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             // add 9 in preview1
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "9";
+            ButtonPressed("9");
         }
         private void button0_Click(object sender, EventArgs e)
         {
-            if (preview1.Text == "0" || newVal || equalAgain)
-            {
-                if (newVal)
-                {
-                    newVal = false;
-                }
-                if (equalAgain)
-                {
-                    preview2.Text = null;
-                    operation = string.Empty;
-                    previewHolder = string.Empty;
-                    newCalculated = 0;
-                    lastNumber = 0;
-                }
-                preview1.Text = null;
-                equalAgain = false;
-            }
-            preview1.Text += "0";
+            ButtonPressed("0");
         }
         private void buttonDot_Click(object sender, EventArgs e)
         {
@@ -406,7 +266,15 @@ namespace Calculator
                 preview1.Text += ".";
             }
         }
-
+        private void AfterOperation(string whatOperation)
+        {
+            preview2.Text = preview2Holder;
+            newCalculated = previewCalculated;
+            preview1.Text = previewCalculated.ToString();
+            newVal = true;
+            numberNegative = false;
+            operation = whatOperation;
+        }
         private void buttonAddition_Click(object sender, EventArgs e)
         {
             // add number
@@ -420,9 +288,9 @@ namespace Calculator
                     previewCalculated = newCalculated;
                     equalAgain = false;
                 }
-                else if(newVal)
+                else if (newVal)
                 {
-                    preview2Holder = preview1.Text + " + ";
+                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " + ";
                     previewCalculated = newCalculated;
                 }
                 else
@@ -448,6 +316,28 @@ namespace Calculator
                         previewCalculated = newCalculated * double.Parse(preview1.Text);
                         preview2Holder = preview2.Text + preview1.Text + " + ";
                     }
+                    else if (operation == "closingParan")
+                    {
+                        if (paranCounter == 0 && paranOperations.Count != 0)
+                        {
+                            for (int i = paranOperations.Count; i != 0; i--)
+                            {
+                                ParanEqual();
+                            }
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " + ";
+                        }
+                        else
+                        {
+                            previewCalculated = double.Parse(preview1.Text);
+                            preview2Holder = preview2.Text + " + ";
+                        }
+                    }
+                    else if (operation == "openParan")
+                    {
+                        previewCalculated = double.Parse(preview1.Text);
+                        preview2Holder = preview2.Text + preview1.Text + " + ";
+                    }
                     else
                     {
                         previewCalculated = newCalculated + double.Parse(preview1.Text);
@@ -460,12 +350,7 @@ namespace Calculator
                 previewCalculated = double.Parse(preview1.Text);
                 preview2Holder = preview1.Text + " + ";
             }
-            preview2.Text = preview2Holder;
-            newCalculated = previewCalculated;
-            preview1.Text = previewCalculated.ToString();
-            newVal = true;
-            numberNegative = false;
-            operation = "add";
+            AfterOperation("add");
         }
 
         private void buttonSubtract_Click(object sender, EventArgs e)
@@ -483,7 +368,7 @@ namespace Calculator
                 }
                 else if (newVal)
                 {
-                    preview2Holder = preview1.Text + " - ";
+                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " - ";
                     previewCalculated = newCalculated;
                 }
                 else
@@ -509,6 +394,28 @@ namespace Calculator
                         previewCalculated = newCalculated * double.Parse(preview1.Text);
                         preview2Holder = preview2.Text + preview1.Text + " - ";
                     }
+                    else if (operation == "closingParan")
+                    {
+                        if (paranCounter == 0 && paranOperations.Count != 0)
+                        {
+                            for (int i = paranOperations.Count; i != 0; i--)
+                            {
+                                ParanEqual();
+                            }
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " - ";
+                        }
+                        else
+                        {
+                            previewCalculated = double.Parse(preview1.Text);
+                            preview2Holder = preview2.Text + " - ";
+                        }
+                    }
+                    else if (operation == "openParan")
+                    {
+                        previewCalculated = double.Parse(preview1.Text);
+                        preview2Holder = preview2.Text + preview1.Text + " - ";
+                    }
                     else
                     {
                         previewCalculated = newCalculated - double.Parse(preview1.Text);
@@ -521,12 +428,7 @@ namespace Calculator
                 previewCalculated = double.Parse(preview1.Text);
                 preview2Holder = preview1.Text + " - ";
             }
-            preview2.Text = preview2Holder;
-            newCalculated = previewCalculated;
-            preview1.Text = previewCalculated.ToString();
-            newVal = true;
-            numberNegative = false;
-            operation = "minus";
+            AfterOperation("minus");
         }
         private void buttonDivide_Click(object sender, EventArgs e)
         {
@@ -542,7 +444,7 @@ namespace Calculator
                 }
                 else if (newVal)
                 {
-                    preview2Holder = preview1.Text + " ÷ ";
+                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " ÷ ";
                     previewCalculated = newCalculated;
                 }
                 else
@@ -568,6 +470,28 @@ namespace Calculator
                         previewCalculated = newCalculated * double.Parse(preview1.Text);
                         preview2Holder = preview2.Text + preview1.Text + " ÷ ";
                     }
+                    else if (operation == "closingParan")
+                    {
+                        if (paranCounter == 0 && paranOperations.Count != 0)
+                        {
+                            for (int i = paranOperations.Count; i != 0; i--)
+                            {
+                                ParanEqual();
+                            }
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " ÷ ";
+                        }
+                        else
+                        {
+                            previewCalculated = double.Parse(preview1.Text);
+                            preview2Holder = preview2.Text + " ÷ ";
+                        }
+                    }
+                    else if (operation == "openParan")
+                    {
+                        previewCalculated = double.Parse(preview1.Text);
+                        preview2Holder = preview2.Text + preview1.Text + " ÷ ";
+                    }
                     else
                     {
                         previewCalculated = newCalculated / double.Parse(preview1.Text);
@@ -580,12 +504,7 @@ namespace Calculator
                 previewCalculated = double.Parse(preview1.Text);
                 preview2Holder = preview1.Text + " ÷ ";
             }
-            preview2.Text = preview2Holder;
-            newCalculated = previewCalculated;
-            preview1.Text = previewCalculated.ToString();
-            newVal = true;
-            numberNegative = false;
-            operation = "divide";
+            AfterOperation("divide");
         }
         private void buttonMultiply_Click(object sender, EventArgs e)
         {
@@ -601,7 +520,7 @@ namespace Calculator
                 }
                 else if (newVal)
                 {
-                    preview2Holder = preview1.Text + " × ";
+                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " × ";
                     previewCalculated = newCalculated;
                 }
                 else
@@ -627,6 +546,28 @@ namespace Calculator
                         previewCalculated = newCalculated / double.Parse(preview1.Text);
                         preview2Holder = preview2.Text + preview1.Text + " × ";
                     }
+                    else if (operation == "closingParan")
+                    {
+                        if (paranCounter == 0 && paranOperations.Count != 0)
+                        {
+                            for (int i = paranOperations.Count; i != 0; i--)
+                            {
+                                ParanEqual();
+                            }
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " × ";
+                        }
+                        else
+                        {
+                            previewCalculated = double.Parse(preview1.Text);
+                            preview2Holder = preview2.Text + " × ";
+                        }
+                    }
+                    else if (operation == "openParan")
+                    {
+                        previewCalculated = double.Parse(preview1.Text);
+                        preview2Holder = preview2.Text + preview1.Text + " × ";
+                    }
                     else
                     {
                         previewCalculated = newCalculated * double.Parse(preview1.Text);
@@ -639,12 +580,19 @@ namespace Calculator
                 previewCalculated = double.Parse(preview1.Text);
                 preview2Holder = preview1.Text + " × ";
             }
-            preview2.Text = preview2Holder;
-            newCalculated = previewCalculated;
-            preview1.Text = previewCalculated.ToString();
-            newVal = true;
-            numberNegative = false;
-            operation = "multiply";
+            AfterOperation("multiply");
+        }
+        private void AfterEqual()
+        {
+            for (int i = paranOperations.Count; i != 0; i--)
+            {
+                ParanEqual();
+            }
+            calculatedAnswer = newCalculated;
+            preview2.Text = preview2.Text + lastNumber.ToString();
+            ClosedTheParan();
+            preview2.Text += " =";
+            preview1.Text = calculatedAnswer.ToString();
         }
 
         private void buttonEqual_Click(object sender, EventArgs e)
@@ -655,10 +603,8 @@ namespace Calculator
                 if (!equalAgain)
                 {
                     lastNumber = double.Parse(preview1.Text);
-                    calculatedAnswer = newCalculated + lastNumber;
-                    newCalculated = calculatedAnswer;
-                    preview2.Text = preview2.Text + lastNumber.ToString() + " =";
-                    preview1.Text = calculatedAnswer.ToString();
+                    newCalculated = newCalculated + lastNumber;
+                    AfterEqual();
                 }
                 else
                 {
@@ -673,10 +619,8 @@ namespace Calculator
                 if (!equalAgain)
                 {
                     lastNumber = double.Parse(preview1.Text);
-                    calculatedAnswer = newCalculated - lastNumber;
-                    newCalculated = calculatedAnswer;
-                    preview2.Text = preview2.Text + lastNumber.ToString() + " =";
-                    preview1.Text = calculatedAnswer.ToString();
+                    newCalculated = newCalculated - lastNumber;
+                    AfterEqual();
                 }
                 else
                 {
@@ -691,16 +635,14 @@ namespace Calculator
                 if (!equalAgain)
                 {
                     lastNumber = double.Parse(preview1.Text);
-                    calculatedAnswer = newCalculated / lastNumber;
-                    newCalculated = calculatedAnswer;
-                    preview2.Text = preview2.Text + lastNumber.ToString() + " =";
-                    preview1.Text = calculatedAnswer.ToString();
+                    newCalculated = newCalculated / lastNumber;
+                    AfterEqual();
                 }
                 else
                 {
                     calculatedAnswer = newCalculated / lastNumber;
                     newCalculated = calculatedAnswer;
-                    preview2.Text = preview1.Text + " ÷ " + lastNumber.ToString() + " =";
+                    preview2.Text = preview1.Text + " / " + lastNumber.ToString() + " =";
                     preview1.Text = calculatedAnswer.ToString();
                 }
             }
@@ -709,18 +651,42 @@ namespace Calculator
                 if (!equalAgain)
                 {
                     lastNumber = double.Parse(preview1.Text);
-                    calculatedAnswer = newCalculated * lastNumber;
-                    newCalculated = calculatedAnswer;
-                    preview2.Text = preview2.Text + lastNumber.ToString() + " =";
-                    preview1.Text = calculatedAnswer.ToString();
+                    newCalculated = newCalculated * lastNumber;
+                    AfterEqual();
                 }
                 else
                 {
                     calculatedAnswer = newCalculated * lastNumber;
                     newCalculated = calculatedAnswer;
-                    preview2.Text = preview1.Text + " × " + lastNumber.ToString() + " =";
+                    preview2.Text = preview1.Text + " * " + lastNumber.ToString() + " =";
                     preview1.Text = calculatedAnswer.ToString();
                 }
+            }
+            else if (operation == "closingParan")
+            {
+                for (int i = paranOperations.Count; i != 0; i--)
+                {
+                    ParanEqual();
+                }
+                calculatedAnswer = newCalculated;
+                ClosedTheParan();
+                preview2.Text += " =";
+                preview1.Text = calculatedAnswer.ToString();
+                operation = string.Empty;
+            }
+            else if (operation == "openParan")
+            {
+                newCalculated = double.Parse(preview1.Text);
+                for (int i = paranOperations.Count; i != 0; i--)
+                {
+                    ParanEqual();
+                }
+                calculatedAnswer = newCalculated;
+                preview2.Text += preview1.Text;
+                ClosedTheParan();
+                preview2.Text += " =";
+                preview1.Text = calculatedAnswer.ToString();
+                operation = string.Empty;
             }
             else
             {
@@ -730,8 +696,8 @@ namespace Calculator
                 preview2.Text = lastNumber + " =";
                 preview1.Text = newCalculated.ToString();
             }
-            equalAgain = true;
             numberNegative = false;
+            equalAgain = true;
         }
 
         private void preview1_TextChanged(object sender, EventArgs e)
@@ -766,6 +732,131 @@ namespace Calculator
                     preview1.Text = $"-{preview1.Text}";
                     numberNegative = true;
                 }
+            }
+        }
+        private void ClosingParen(string whatOperation)
+        {
+            if (whatOperation == "closingParan")
+            {
+                preview2.Text += " ) ";
+            }
+            else
+            {
+                preview2.Text += preview1.Text + " ) ";
+            }
+            if (whatOperation == "openParan")
+            {
+                newCalculated = double.Parse(preview1.Text);
+            }
+            else if (whatOperation == "add")
+            {
+                newCalculated += double.Parse(preview1.Text);
+            }
+            else if (whatOperation == "minus")
+            {
+                newCalculated -= double.Parse(preview1.Text);
+            }
+            else if (whatOperation == "divide")
+            {
+                newCalculated /= double.Parse(preview1.Text);
+            }
+            else if (whatOperation == "multiply")
+            {
+                newCalculated *= double.Parse(preview1.Text);
+            }
+            else if (whatOperation == "closingParan")
+            {
+                string lastParanOperation = (string)paranOperations[paranOperations.Count - 1];
+                double lastParanNumber = (double)paranLastValue[paranLastValue.Count - 1];
+                paranOperations.RemoveAt(paranOperations.Count - 1);
+                paranLastValue.RemoveAt(paranLastValue.Count - 1);
+                if (lastParanOperation == "add")
+                {
+                    newCalculated = lastParanNumber + newCalculated;
+                }
+                else if (lastParanOperation == "minus")
+                {
+                    newCalculated = lastParanNumber - newCalculated;
+                }
+                else if (lastParanOperation == "divide")
+                {
+                    newCalculated = lastParanNumber / newCalculated;
+                }
+                else if (lastParanOperation == "multiply")
+                {
+                    newCalculated = lastParanNumber * newCalculated;
+                }
+            }
+            preview1.Text = newCalculated.ToString();
+        }
+        private void ParanEqual()
+        {
+            string lastParanOperation = (string)paranOperations[paranOperations.Count - 1];
+            double lastParanNumber = (double)paranLastValue[paranLastValue.Count - 1];
+            paranOperations.RemoveAt(paranOperations.Count - 1);
+            paranLastValue.RemoveAt(paranLastValue.Count - 1);
+            if (lastParanOperation == "add")
+            {
+                newCalculated = lastParanNumber + newCalculated;
+            }
+            else if (lastParanOperation == "minus")
+            {
+                newCalculated = lastParanNumber - newCalculated;
+            }
+            else if (lastParanOperation == "divide")
+            {
+                newCalculated = lastParanNumber / newCalculated;
+            }
+            else if (lastParanOperation == "multiply")
+            {
+                newCalculated = lastParanNumber * newCalculated;
+            }
+        }
+        private void ClosedTheParan()
+        {
+            if (paranCounter != 0)
+            {
+                for (int i = paranCounter; i != 0; i--)
+                {
+                    preview2.Text += " ) ";
+                }
+                operation = string.Empty;
+            }
+        }
+        private void buttonOpenParen_Click(object sender, EventArgs e)
+        {
+            if (preview2.Text.Length > 1)
+            {
+                if (operation != "openParan" || operation != "closingParan")
+                {
+                    paranLastValue.Add(newCalculated);
+                    paranOperations.Add(operation);
+                }
+            }
+            if (operation == "closingParan")
+            {
+                preview2.Text = " ( ";
+            }
+            else
+            {
+                preview2.Text += " ( ";
+            }
+            if (operation != string.Empty)
+            {
+                preview1.Text = "0";
+                newCalculated = 0;
+            }
+            operation = "openParan";
+            paranCounter++;
+        }
+
+        private void buttonCloseParen_Click(object sender, EventArgs e)
+        {
+            if (paranCounter != 0)
+            {
+                ClosingParen(operation);
+                paranCounter--;
+                operation = "closingParan";
             }
         }
     }

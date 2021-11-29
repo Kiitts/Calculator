@@ -422,6 +422,7 @@ namespace Calculator
             this.buttonOpenParen.TabIndex = 36;
             this.buttonOpenParen.Text = "(";
             this.buttonOpenParen.UseVisualStyleBackColor = false;
+            this.buttonOpenParen.Click += new System.EventHandler(this.buttonOpenParen_Click);
             // 
             // buttonCloseParen
             // 
@@ -434,6 +435,7 @@ namespace Calculator
             this.buttonCloseParen.TabIndex = 37;
             this.buttonCloseParen.Text = ")";
             this.buttonCloseParen.UseVisualStyleBackColor = false;
+            this.buttonCloseParen.Click += new System.EventHandler(this.buttonCloseParen_Click);
             // 
             // buttonFactorial
             // 
