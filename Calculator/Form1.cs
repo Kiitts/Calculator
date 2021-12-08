@@ -267,6 +267,18 @@ namespace Calculator
                 preview1.Text += ".";
             }
         }
+        private void preview2HolderOperation(string previewSymbol)
+        {
+            if (alreadyPreview2)
+            {
+                preview2Holder = preview2.Text + $" {previewSymbol} ";
+                alreadyPreview2 = false;
+            }
+            else
+            {
+                preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
+            }
+        }
         private void Operational(string whatOperation, string previewSymbol)
         {
 
@@ -292,26 +304,26 @@ namespace Calculator
                         // if the last operation is subtraction, the preview will show
                         // the value of the last calculated number minus the last input.
                         previewCalculated = newCalculated - double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
+                        preview2HolderOperation(previewSymbol);
                     }
                     else if (operation == "divide")
                     {
                         // if the last operation is division, the preview will show
                         // the value of the last calculated number divide the last input.
                         previewCalculated = newCalculated / double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
+                        preview2HolderOperation(previewSymbol);
                     }
                     else if (operation == "multiply")
                     {
                         // if the last operation is division, the preview will show
                         // the value of the last calculated number divide the last input.
                         previewCalculated = newCalculated * double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
+                        preview2HolderOperation(previewSymbol);
                     }
                     else if (operation == "add")
                     {
                         previewCalculated = newCalculated + double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
+                        preview2HolderOperation(previewSymbol);
                     }
                     else if (operation == "closingParan")
                     {
@@ -333,7 +345,12 @@ namespace Calculator
                     else if (operation == "openParan")
                     {
                         previewCalculated = double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
+                        preview2HolderOperation(previewSymbol);
+                    }
+                    else
+                    {
+                        previewCalculated = double.Parse(preview1.Text);
+                        preview2HolderOperation(previewSymbol);
                     }
                 }
             }
@@ -372,7 +389,14 @@ namespace Calculator
                 ParanEqual();
             }
             calculatedAnswer = newCalculated;
-            preview2.Text = preview2.Text + lastNumber.ToString();
+            if (alreadyPreview2)
+            {
+                preview2.Text = preview2.Text;
+            }
+            else
+            {
+                preview2.Text = preview2.Text + lastNumber.ToString();
+            }
             ClosedTheParan();
             preview2.Text += " =";
             preview1.Text = calculatedAnswer.ToString();
@@ -643,7 +667,7 @@ namespace Calculator
                 else if (angleButton.Text == "RAD")
                 {
                     preview2.Text += $"sinᵣ({preview1.Text})";
-                    holderAngle = Math.Round(Math.Sin(double.Parse(preview1.Text)));
+                    holderAngle = Math.Round(Math.Sin(double.Parse(preview1.Text)), 11);
                     preview1.Text = holderAngle.ToString();
                 }
             }
