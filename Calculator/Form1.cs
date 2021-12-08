@@ -15,6 +15,7 @@ namespace Calculator
     {
         public bool newVal = false;
         public bool equalAgain = false;
+        public bool alreadyPreview2 = false;
         public string previewHolder = string.Empty;
         public string operation = string.Empty;
         public string preview2Holder = string.Empty;
@@ -33,6 +34,7 @@ namespace Calculator
             equalAgain = false;
             previewHolder = string.Empty;
             operation = string.Empty;
+            alreadyPreview2 = false;
             newCalculated = 0;
             previewCalculated = 0;
             lastNumber = 0;
@@ -265,30 +267,22 @@ namespace Calculator
                 preview1.Text += ".";
             }
         }
-        private void AfterOperation(string whatOperation)
+        private void Operational(string whatOperation, string previewSymbol)
         {
-            preview2.Text = preview2Holder;
-            newCalculated = previewCalculated;
-            preview1.Text = previewCalculated.ToString();
-            newVal = true;
-            operation = whatOperation;
-        }
-        private void buttonAddition_Click(object sender, EventArgs e)
-        {
-            // add number
+
             if (preview2.Text.Length > 1)
             {
                 // if the preview2 has values
                 if (equalAgain)
                 {
                     // if recently equal
-                    preview2Holder = preview1.Text + " + ";
+                    preview2Holder = preview1.Text + $" {previewSymbol} ";
                     previewCalculated = newCalculated;
                     equalAgain = false;
                 }
                 else if (newVal)
                 {
-                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " + ";
+                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + $" {previewSymbol} ";
                     previewCalculated = newCalculated;
                 }
                 else
@@ -298,21 +292,26 @@ namespace Calculator
                         // if the last operation is subtraction, the preview will show
                         // the value of the last calculated number minus the last input.
                         previewCalculated = newCalculated - double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " + ";
+                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
                     }
                     else if (operation == "divide")
                     {
                         // if the last operation is division, the preview will show
                         // the value of the last calculated number divide the last input.
                         previewCalculated = newCalculated / double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " + ";
+                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
                     }
                     else if (operation == "multiply")
                     {
                         // if the last operation is division, the preview will show
                         // the value of the last calculated number divide the last input.
                         previewCalculated = newCalculated * double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " + ";
+                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
+                    }
+                    else if (operation == "add")
+                    {
+                        previewCalculated = newCalculated + double.Parse(preview1.Text);
+                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
                     }
                     else if (operation == "closingParan")
                     {
@@ -323,262 +322,48 @@ namespace Calculator
                                 ParanEqual();
                             }
                             previewCalculated = newCalculated;
-                            preview2Holder = preview2.Text + " + ";
+                            preview2Holder = preview2.Text + $" {previewSymbol} ";
                         }
                         else
                         {
                             previewCalculated = double.Parse(preview1.Text);
-                            preview2Holder = preview2.Text + " + ";
+                            preview2Holder = preview2.Text + $" {previewSymbol} ";
                         }
                     }
                     else if (operation == "openParan")
                     {
                         previewCalculated = double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " + ";
-                    }
-                    else
-                    {
-                        previewCalculated = newCalculated + double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " + ";
+                        preview2Holder = preview2.Text + preview1.Text + $" {previewSymbol} ";
                     }
                 }
             }
             else
             {
                 previewCalculated = double.Parse(preview1.Text);
-                preview2Holder = preview1.Text + " + ";
+                preview2Holder = preview1.Text + $" {previewSymbol} ";
             }
-            AfterOperation("add");
+            preview2.Text = preview2Holder;
+            newCalculated = previewCalculated;
+            preview1.Text = previewCalculated.ToString();
+            newVal = true;
+            operation = whatOperation;
+        }
+        private void buttonAddition_Click(object sender, EventArgs e)
+        {
+            Operational("add", "+");
         }
 
         private void buttonSubtract_Click(object sender, EventArgs e)
         {
-            // subtract number
-            if (preview2.Text.Length > 0)
-            {
-                // if preview 2 has values
-                if (equalAgain)
-                {
-                    // if recently equal
-                    preview2Holder = preview1.Text + " - ";
-                    previewCalculated = newCalculated;
-                    equalAgain = false;
-                }
-                else if (newVal)
-                {
-                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " - ";
-                    previewCalculated = newCalculated;
-                }
-                else
-                {
-                    if (operation == "add")
-                    {
-                        // if the last operation is addition, the preview will show
-                        // the value of the last calculated number plus the last input.
-                        previewCalculated = newCalculated + double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " - ";
-                    }
-                    else if (operation == "divide")
-                    {
-                        // if the last operation is division, the preview will show
-                        // the value of the last calculated number divide the last input.
-                        previewCalculated = newCalculated / double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " - ";
-                    }
-                    else if (operation == "multiply")
-                    {
-                        // if the last operation is division, the preview will show
-                        // the value of the last calculated number divide the last input.
-                        previewCalculated = newCalculated * double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " - ";
-                    }
-                    else if (operation == "closingParan")
-                    {
-                        if (paranCounter == 0 && paranOperations.Count != 0)
-                        {
-                            for (int i = paranOperations.Count; i != 0; i--)
-                            {
-                                ParanEqual();
-                            }
-                            previewCalculated = newCalculated;
-                            preview2Holder = preview2.Text + " - ";
-                        }
-                        else
-                        {
-                            previewCalculated = double.Parse(preview1.Text);
-                            preview2Holder = preview2.Text + " - ";
-                        }
-                    }
-                    else if (operation == "openParan")
-                    {
-                        previewCalculated = double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " - ";
-                    }
-                    else
-                    {
-                        previewCalculated = newCalculated - double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " - ";
-                    }
-                }
-            }
-            else
-            {
-                previewCalculated = double.Parse(preview1.Text);
-                preview2Holder = preview1.Text + " - ";
-            }
-            AfterOperation("minus");
+            Operational("minus", "-");
         }
         private void buttonDivide_Click(object sender, EventArgs e)
         {
-            if (preview2.Text.Length > 0)
-            {
-                // if preview 2 has values
-                if (equalAgain)
-                {
-                    // if recently equal
-                    preview2Holder = preview1.Text + " ÷ ";
-                    previewCalculated = newCalculated;
-                    equalAgain = false;
-                }
-                else if (newVal)
-                {
-                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " ÷ ";
-                    previewCalculated = newCalculated;
-                }
-                else
-                {
-                    if (operation == "add")
-                    {
-                        // if the last operation is addition, the preview will show
-                        // the value of the last calculated number plus the last input.
-                        previewCalculated = newCalculated + double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " ÷ ";
-                    }
-                    else if (operation == "minus")
-                    {
-                        // if the last operation is subtraction, the preview will show
-                        // the value of the last calculated number minus the last input.
-                        previewCalculated = newCalculated - double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " ÷ ";
-                    }
-                    else if (operation == "multiply")
-                    {
-                        // if the last operation is division, the preview will show
-                        // the value of the last calculated number divide the last input.
-                        previewCalculated = newCalculated * double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " ÷ ";
-                    }
-                    else if (operation == "closingParan")
-                    {
-                        if (paranCounter == 0 && paranOperations.Count != 0)
-                        {
-                            for (int i = paranOperations.Count; i != 0; i--)
-                            {
-                                ParanEqual();
-                            }
-                            previewCalculated = newCalculated;
-                            preview2Holder = preview2.Text + " ÷ ";
-                        }
-                        else
-                        {
-                            previewCalculated = double.Parse(preview1.Text);
-                            preview2Holder = preview2.Text + " ÷ ";
-                        }
-                    }
-                    else if (operation == "openParan")
-                    {
-                        previewCalculated = double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " ÷ ";
-                    }
-                    else
-                    {
-                        previewCalculated = newCalculated / double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " ÷ ";
-                    }
-                }
-            }
-            else
-            {
-                previewCalculated = double.Parse(preview1.Text);
-                preview2Holder = preview1.Text + " ÷ ";
-            }
-            AfterOperation("divide");
+            Operational("divide", "÷");
         }
         private void buttonMultiply_Click(object sender, EventArgs e)
         {
-            if (preview2.Text.Length > 0)
-            {
-                // if preview 2 has values
-                if (equalAgain)
-                {
-                    // if recently equal
-                    preview2Holder = preview1.Text + " × ";
-                    previewCalculated = newCalculated;
-                    equalAgain = false;
-                }
-                else if (newVal)
-                {
-                    preview2Holder = preview2.Text.Remove(preview2.Text.Length - 3) + " × ";
-                    previewCalculated = newCalculated;
-                }
-                else
-                {
-                    if (operation == "add")
-                    {
-                        // if the last operation is addition, the preview will show
-                        // the value of the last calculated number plus the last input.
-                        previewCalculated = newCalculated + double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " × ";
-                    }
-                    else if (operation == "minus")
-                    {
-                        // if the last operation is subtraction, the preview will show
-                        // the value of the last calculated number minus the last input.
-                        previewCalculated = newCalculated - double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " × ";
-                    }
-                    else if (operation == "divide")
-                    {
-                        // if the last operation is division, the preview will show
-                        // the value of the last calculated number divide the last input.
-                        previewCalculated = newCalculated / double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " × ";
-                    }
-                    else if (operation == "closingParan")
-                    {
-                        if (paranCounter == 0 && paranOperations.Count != 0)
-                        {
-                            for (int i = paranOperations.Count; i != 0; i--)
-                            {
-                                ParanEqual();
-                            }
-                            previewCalculated = newCalculated;
-                            preview2Holder = preview2.Text + " × ";
-                        }
-                        else
-                        {
-                            previewCalculated = double.Parse(preview1.Text);
-                            preview2Holder = preview2.Text + " × ";
-                        }
-                    }
-                    else if (operation == "openParan")
-                    {
-                        previewCalculated = double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " × ";
-                    }
-                    else
-                    {
-                        previewCalculated = newCalculated * double.Parse(preview1.Text);
-                        preview2Holder = preview2.Text + preview1.Text + " × ";
-                    }
-                }
-            }
-            else
-            {
-                previewCalculated = double.Parse(preview1.Text);
-                preview2Holder = preview1.Text + " × ";
-            }
-            AfterOperation("multiply");
+            Operational("multiply", "×");
         }
         private void AfterEqual()
         {
@@ -841,6 +626,28 @@ namespace Calculator
                 paranCounter--;
                 operation = "closingParan";
             }
+        }
+
+        private void sinButton_Click(object sender, EventArgs e)
+        {
+            double holderAngle = 0;
+            if (sinButton.Text == "sin")
+            {
+                if (angleButton.Text == "DEG")
+                {
+                    preview2.Text += $"sin₀({preview1.Text})";
+                    holderAngle = Math.Round(Math.Sin(double.Parse(preview1.Text) *
+                        Math.PI / 180), 11);
+                    preview1.Text = holderAngle.ToString();
+                }
+                else if (angleButton.Text == "RAD")
+                {
+                    preview2.Text += $"sinᵣ({preview1.Text})";
+                    holderAngle = Math.Round(Math.Sin(double.Parse(preview1.Text)));
+                    preview1.Text = holderAngle.ToString();
+                }
+            }
+            alreadyPreview2 = true;
         }
     }
 }
