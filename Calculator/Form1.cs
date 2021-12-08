@@ -118,14 +118,13 @@ namespace Calculator
             if (needChange)
             {
                 Button[] buttons = new Button[] {sinButton, cosButton, tanButton,
-                secButton, scsButton, cotButton};
+                secButton, cscButton, cotButton};
                 string[] buttonsName = new string[] {"sin", "cos", "tan",
-                "sec", "scs", "cot"};
+                "sec", "csc", "cot"};
                 var buttonsAndName = buttons.Zip(buttonsName, (t, n) =>
                     new { ButtonsObj = t, ButtonNames = n });
                 foreach (var x in buttonsAndName)
                 {
-                    x.ButtonsObj.Image = null;
                     x.ButtonsObj.Text = x.ButtonNames;
                 }
 
@@ -150,15 +149,14 @@ namespace Calculator
             else
             {
                 Button[] buttons = new Button[] {sinButton, cosButton, tanButton,
-                secButton, scsButton, cotButton};
-                string[] buttonsName = new string[] {"arcsin.png", "arccos.png", "arctan.png",
-                "arcsec.png", "arcscs.png", "arccot.png"};
+                secButton, cscButton, cotButton};
+                string[] buttonsName = new string[] {"sin⁻¹", "cos⁻¹", "tan⁻¹",
+                "sec⁻¹", "csc⁻¹", "cot⁻¹"};
                 var buttonsAndName = buttons.Zip(buttonsName, (t, n) =>
                     new { ButtonsObj = t, ButtonNames = n });
                 foreach (var x in buttonsAndName)
                 {
-                    x.ButtonsObj.Text = null;
-                    x.ButtonsObj.Image = Image.FromFile("data/image/" + x.ButtonNames);
+                    x.ButtonsObj.Text = x.ButtonNames;
                 }
 
                 buttons = new Button[]
@@ -392,6 +390,7 @@ namespace Calculator
             if (alreadyPreview2)
             {
                 preview2.Text = preview2.Text;
+                alreadyPreview2 = false;
             }
             else
             {
@@ -651,27 +650,98 @@ namespace Calculator
                 operation = "closingParan";
             }
         }
+        private double GetAngleValue(string whatAngle, double theValue)
+        {
+            switch (whatAngle)
+            {
+                case "sin":
+                    return Math.Sin(theValue);
+                case "cos":
+                    return Math.Cos(theValue);
+                case "tan":
+                    return Math.Tan(theValue);
+                case "sec":
+                    return 1 / Math.Cos(theValue);
+                case "csc":
+                    return 1 / Math.Sin(theValue);
+                case "cot":
+                    return 1 / Math.Tan(theValue);
+            }
+            return 0;
+        }
+
+        private void AngleOperation(string whatAngle)
+        {
+            double holderAngle = 0;
+            if (angleButton.Text == "DEG")
+            {
+                preview2.Text += $"{whatAngle}₀({preview1.Text})";
+                holderAngle = Math.Round(GetAngleValue(whatAngle, double.Parse(preview1.Text) *
+                    (Math.PI / 180)), 11);
+                preview1.Text = holderAngle.ToString();
+            }
+            else if (angleButton.Text == "RAD")
+            {
+                preview2.Text += $"{whatAngle}ᵣ({preview1.Text})";
+                holderAngle = Math.Round(GetAngleValue(whatAngle, double.Parse(preview1.Text)), 11);
+                preview1.Text = holderAngle.ToString();
+            }
+            else
+            {
+                preview2.Text += $"{whatAngle}₉({preview1.Text})";
+                holderAngle = Math.Round(GetAngleValue(whatAngle, double.Parse(preview1.Text) *
+                     Math.PI / 200), 11);
+                preview1.Text = holderAngle.ToString();
+            }
+            alreadyPreview2 = true;
+        }
 
         private void sinButton_Click(object sender, EventArgs e)
         {
-            double holderAngle = 0;
             if (sinButton.Text == "sin")
             {
-                if (angleButton.Text == "DEG")
-                {
-                    preview2.Text += $"sin₀({preview1.Text})";
-                    holderAngle = Math.Round(Math.Sin(double.Parse(preview1.Text) *
-                        Math.PI / 180), 11);
-                    preview1.Text = holderAngle.ToString();
-                }
-                else if (angleButton.Text == "RAD")
-                {
-                    preview2.Text += $"sinᵣ({preview1.Text})";
-                    holderAngle = Math.Round(Math.Sin(double.Parse(preview1.Text)), 11);
-                    preview1.Text = holderAngle.ToString();
-                }
+                AngleOperation("sin");
             }
-            alreadyPreview2 = true;
+        }
+
+        private void cosButton_Click(object sender, EventArgs e)
+        {
+            if (cosButton.Text == "cos")
+            {
+                AngleOperation("cos");
+            }
+        }
+
+        private void tanButton_Click(object sender, EventArgs e)
+        {
+            if (tanButton.Text == "tan")
+            {
+                AngleOperation("tan");
+            }
+        }
+
+        private void secButton_Click(object sender, EventArgs e)
+        {
+            if (secButton.Text == "sec")
+            {
+                AngleOperation("sec");
+            }
+        }
+
+        private void cscButton_Click(object sender, EventArgs e)
+        {
+            if (cscButton.Text == "csc")
+            {
+                AngleOperation("csc");
+            }
+        }
+
+        private void cotButton_Click(object sender, EventArgs e)
+        {
+            if (cotButton.Text == "cot")
+            {
+                AngleOperation("cot");
+            }
         }
     }
 }
