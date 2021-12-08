@@ -15,7 +15,6 @@ namespace Calculator
     {
         public bool newVal = false;
         public bool equalAgain = false;
-        public bool numberNegative = false;
         public string previewHolder = string.Empty;
         public string operation = string.Empty;
         public string preview2Holder = string.Empty;
@@ -28,17 +27,19 @@ namespace Calculator
         public int paranCounter = 0;
         public bool needChange = false;
 
-        private void reset()
+        private void reset(bool preview1reset = true)
         {
             newVal = false;
             equalAgain = false;
             previewHolder = string.Empty;
-            numberNegative = false;
             operation = string.Empty;
             newCalculated = 0;
             previewCalculated = 0;
             lastNumber = 0;
-            preview1.Text = "0";
+            if (preview1reset)
+            {
+                preview1.Text = "0";
+            }
             preview2.Text = null;
             paranCounter = 0;
             for (int i = paranLastValue.Count; i != 0; i--)
@@ -55,7 +56,6 @@ namespace Calculator
             {
                 // if input is less than 1 it will just update the preview1 to "0"
                 preview1.Text = "0";
-                numberNegative = false;
             }
             else
             {
@@ -85,7 +85,6 @@ namespace Calculator
             else
             {
                 // this will clear the preview1 and reset it back to "0"
-                numberNegative = false;
                 preview1.Text = "0";
             }
         }
@@ -272,7 +271,6 @@ namespace Calculator
             newCalculated = previewCalculated;
             preview1.Text = previewCalculated.ToString();
             newVal = true;
-            numberNegative = false;
             operation = whatOperation;
         }
         private void buttonAddition_Click(object sender, EventArgs e)
@@ -696,7 +694,6 @@ namespace Calculator
                 preview2.Text = lastNumber + " =";
                 preview1.Text = newCalculated.ToString();
             }
-            numberNegative = false;
             equalAgain = true;
         }
 
@@ -714,25 +711,7 @@ namespace Calculator
 
         private void buttonNegativePositive_Click(object sender, EventArgs e)
         {
-            // this will convert any number to negative, if it's positive
-            // and positive, if it's negative
-            if (preview1.Text == "0")
-            {
-                preview1.Text = "0";
-            }
-            else
-            {
-                if (numberNegative == true)
-                {
-                    preview1.Text = preview1.Text.Remove(0, 1);
-                    numberNegative = false;
-                }
-                else
-                {
-                    preview1.Text = $"-{preview1.Text}";
-                    numberNegative = true;
-                }
-            }
+            preview1.Text = (-1 * double.Parse(preview1.Text)).ToString();
         }
         private void ClosingParen(string whatOperation)
         {
@@ -825,6 +804,10 @@ namespace Calculator
         }
         private void buttonOpenParen_Click(object sender, EventArgs e)
         {
+            if (equalAgain)
+            {
+                reset(false);
+            }
             if (preview2.Text.Length > 1)
             {
                 if (operation != "openParan" || operation != "closingParan")
