@@ -16,6 +16,7 @@ namespace Calculator
         public bool newVal = false;
         public bool equalAgain = false;
         public bool alreadyPreview2 = false;
+        public bool squared = false;
         public string previewHolder = string.Empty;
         public string operation = string.Empty;
         public string preview2Holder = string.Empty;
@@ -111,78 +112,72 @@ namespace Calculator
                 angleButton.Text = "DEG";
             }
         }
+        private void hypButton_Click(object sender, EventArgs e)
+        {
+            Button[] buttons = new Button[] {sinButton, cosButton, tanButton,
+                secButton, cscButton, cotButton};
+            if (!buttons[0].Text.Contains('h'))
+            {
+                if (buttons[0].Text.Contains("⁻¹"))
+                {
+                    for (int i = 0; i < buttons.Length; i++)
+                    {
+                        if (i < 3)
+                        {
+                            buttons[i].Text = buttons[i].Text.Remove(buttons[i].Text.Length - 2) + "h⁻¹";
+                        }
+                        else
+                        {
+                            buttons[i].Text += "h";
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i<buttons.Length; i++)
+                    {
+                        buttons[i].Text += "h";
+                    }
+                }
+            }
+            else
+            {
+                for(int i = 0; i < buttons.Length; i++)
+                {
+                    buttons[i].Text = buttons[i].Text.Replace("h", String.Empty);
+                }
+            }
+        }
 
         private void changeTrigoButton_Click(object sender, EventArgs e)
         {
             //change trigometry buttons and others
-            if (needChange)
+            Button[] buttons = new Button[] { sinButton, cosButton, tanButton,
+                secButton, cscButton, cotButton };
+            if(buttons[0].Text.Contains("⁻¹"))
             {
-                Button[] buttons = new Button[] {sinButton, cosButton, tanButton,
-                secButton, cscButton, cotButton};
-                string[] buttonsName = new string[] {"sin", "cos", "tan",
-                "sec", "csc", "cot"};
-                var buttonsAndName = buttons.Zip(buttonsName, (t, n) =>
-                    new { ButtonsObj = t, ButtonNames = n });
-                foreach (var x in buttonsAndName)
+                for (int i = 0; i < buttons.Length; i++)
                 {
-                    x.ButtonsObj.Text = x.ButtonNames;
+                    buttons[i].Text = buttons[i].Text.Remove(buttons[i].Text.Length - 2);
                 }
-
-                buttons = new Button[]
-                {
-                    xSquaredButton, squareRootButton, exponentButton, exponentialTen,
-                    logButton, lnButton
-                };
-                buttonsName = new string[]
-                {
-                    "x^2", "2√x", "x^y", "10^x", "log", "ln"
-                };
-                buttonsAndName = buttons.Zip(buttonsName, (t, n) =>
-                    new { ButtonsObj = t, ButtonNames = n });
-                foreach (var x in buttonsAndName)
-                {
-                    x.ButtonsObj.Text = x.ButtonNames;
-                }
-
-                needChange = false;
+                xSquaredButton.Text = "x²"; squareRootButton.Text = "√x"; exponentButton.Text = "x^y";
+                exponentialTen.Text = "10^x"; logButton.Text = "log"; lnButton.Text = "ln";
             }
             else
             {
-                Button[] buttons = new Button[] {sinButton, cosButton, tanButton,
-                secButton, cscButton, cotButton};
-                string[] buttonsName = new string[] {"sin⁻¹", "cos⁻¹", "tan⁻¹",
-                "sec⁻¹", "csc⁻¹", "cot⁻¹"};
-                var buttonsAndName = buttons.Zip(buttonsName, (t, n) =>
-                    new { ButtonsObj = t, ButtonNames = n });
-                foreach (var x in buttonsAndName)
+                for (int i = 0; i < buttons.Length; i++)
                 {
-                    x.ButtonsObj.Text = x.ButtonNames;
+                    buttons[i].Text += "⁻¹";
                 }
-
-                buttons = new Button[]
-                {
-                    xSquaredButton, squareRootButton, exponentButton, exponentialTen,
-                    logButton, lnButton
-                };
-                buttonsName = new string[]
-                {
-                    "x^3", "3√x", "y√x", "2^x", "logx^y", "e^x"
-                };
-                buttonsAndName = buttons.Zip(buttonsName, (t, n) =>
-                    new { ButtonsObj = t, ButtonNames = n });
-                foreach (var x in buttonsAndName)
-                {
-                    x.ButtonsObj.Text = x.ButtonNames;
-                }
-
-                needChange = true;
+                xSquaredButton.Text = "x³"; squareRootButton.Text = "³√x"; exponentButton.Text = "y√x";
+                exponentialTen.Text = "2^x"; logButton.Text = "logᵧx"; lnButton.Text = "e^x";
             }
         }
 
         // numerical buttons
         private void ButtonPressed(string selectedNumber)
         {
-            if (preview1.Text == "0" || newVal || equalAgain)
+            if (preview1.Text == "0" || newVal || equalAgain || squared)
             {
                 if (newVal)
                 {
@@ -196,8 +191,9 @@ namespace Calculator
                     newCalculated = 0;
                     lastNumber = 0;
                 }
-                preview1.Text = null;
+                preview1.Text = string.Empty;
                 equalAgain = false;
+                squared = false;
             }
             preview1.Text += selectedNumber;
         }
@@ -279,7 +275,7 @@ namespace Calculator
         }
         private void Operational(string whatOperation, string previewSymbol)
         {
-
+            
             if (preview2.Text.Length > 1)
             {
                 // if the preview2 has values
@@ -301,27 +297,63 @@ namespace Calculator
                     {
                         // if the last operation is subtraction, the preview will show
                         // the value of the last calculated number minus the last input.
-                        previewCalculated = newCalculated - double.Parse(preview1.Text);
-                        preview2HolderOperation(previewSymbol);
+                        if (squared)
+                        {
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " +";
+                            squared = false;
+                        }
+                        else
+                        {
+                            previewCalculated = newCalculated - double.Parse(preview1.Text);
+                            preview2HolderOperation(previewSymbol);
+                        }
                     }
                     else if (operation == "divide")
                     {
                         // if the last operation is division, the preview will show
                         // the value of the last calculated number divide the last input.
-                        previewCalculated = newCalculated / double.Parse(preview1.Text);
-                        preview2HolderOperation(previewSymbol);
+                        if (squared)
+                        {
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " +";
+                            squared = false;
+                        }
+                        else
+                        {
+                            previewCalculated = newCalculated / double.Parse(preview1.Text);
+                            preview2HolderOperation(previewSymbol);
+                        }
                     }
                     else if (operation == "multiply")
                     {
                         // if the last operation is division, the preview will show
                         // the value of the last calculated number divide the last input.
-                        previewCalculated = newCalculated * double.Parse(preview1.Text);
-                        preview2HolderOperation(previewSymbol);
+                        if (squared)
+                        {
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " +";
+                            squared = false;
+                        }
+                        else
+                        {
+                            previewCalculated = newCalculated * double.Parse(preview1.Text);
+                            preview2HolderOperation(previewSymbol);
+                        }
                     }
                     else if (operation == "add")
                     {
-                        previewCalculated = newCalculated + double.Parse(preview1.Text);
-                        preview2HolderOperation(previewSymbol);
+                        if (squared)
+                        {
+                            previewCalculated = newCalculated;
+                            preview2Holder = preview2.Text + " +";
+                            squared = false;
+                        }
+                        else
+                        {
+                            previewCalculated = newCalculated + double.Parse(preview1.Text);
+                            preview2HolderOperation(previewSymbol);
+                        }
                     }
                     else if (operation == "closingParan")
                     {
@@ -394,7 +426,10 @@ namespace Calculator
             }
             else
             {
-                preview2.Text = preview2.Text + lastNumber.ToString();
+                if (!squared)
+                {
+                    preview2.Text = preview2.Text + lastNumber.ToString();
+                }
             }
             ClosedTheParan();
             preview2.Text += " =";
@@ -404,7 +439,19 @@ namespace Calculator
         private void buttonEqual_Click(object sender, EventArgs e)
         {
             //equal the function
-            if (operation == "add")
+            if(squared)
+            {
+                if (!equalAgain)
+                {
+                    AfterEqual();
+                }
+                else
+                {
+                    preview2.Text = preview1.Text + " =";
+                    preview1.Text = newCalculated.ToString();
+                }
+            }
+            else if (operation == "add")
             {
                 if (!equalAgain)
                 {
@@ -507,6 +554,14 @@ namespace Calculator
 
         private void preview1_TextChanged(object sender, EventArgs e)
         {
+            Button[] buttons = new Button[] {angleButton, button0, button1, button2, button3, button4,
+            button5, button6, button7, button8, button9, eraseButton, changeTrigoButton, sinButton,
+            cosButton, tanButton, secButton, cscButton, hypButton, cosButton, xSquaredButton, buttonOverX,
+            buttonAbsolute, buttonExponential, buttonModulus, squareRootButton, buttonOpenParen,
+            buttonCloseParen, buttonFactorial, buttonDivide, buttonMultiply, buttonAddition, buttonSubtract,
+            buttonEqual, exponentButton, exponentialTen,logButton, lnButton, buttonNegativePositive,
+            buttonDot};
+
             if (preview1.Text != "0")
             {
                 clearButton.Text = "CE";
@@ -515,11 +570,28 @@ namespace Calculator
             {
                 clearButton.Text = "C";
             }
+            if(preview1.Text == "NaN" || preview1.Text == "∞")
+            {
+                for(int i = 0; i < buttons.Length; i++)
+                {
+                    buttons[i].Enabled = false;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < buttons.Length; i++)
+                {
+                    buttons[i].Enabled = true;
+                }
+            }
         }
 
         private void buttonNegativePositive_Click(object sender, EventArgs e)
         {
-            preview1.Text = (-1 * double.Parse(preview1.Text)).ToString();
+            if (preview1.Text != "0")
+            {
+                preview1.Text = (-1 * double.Parse(preview1.Text)).ToString();
+            }
         }
         private void ClosingParen(string whatOperation)
         {
@@ -652,7 +724,7 @@ namespace Calculator
         }
         private double GetAngleValue(string whatAngle, double theValue)
         {
-            switch (whatAngle)
+            switch(whatAngle)
             {
                 case "sin":
                     return Math.Sin(theValue);
@@ -666,6 +738,30 @@ namespace Calculator
                     return 1 / Math.Sin(theValue);
                 case "cot":
                     return 1 / Math.Tan(theValue);
+                case "sin⁻¹":
+                    return Math.Asin(theValue);
+                case "cos⁻¹":
+                    return Math.Acos(theValue);
+                case "tan⁻¹":
+                    return Math.Atan(theValue);
+                case "sec⁻¹":
+                    return 1 / Math.Acos(theValue);
+                case "csc⁻¹":
+                    return 1 / Math.Asin(theValue);
+                case "cot⁻¹":
+                    return 1 / Math.Atan(theValue);
+                case "sinh":
+                    return Math.Sinh(theValue);
+                case "cosh":
+                    return Math.Cosh(theValue);
+                case "tanh":
+                    return Math.Tanh(theValue);
+                case "sech":
+                    return 1 / Math.Cosh(theValue);
+                case "csch":
+                    return 1 / Math.Sinh(theValue);
+                case "coth":
+                    return 1 / Math.Tanh(theValue);
             }
             return 0;
         }
@@ -676,9 +772,8 @@ namespace Calculator
             if (angleButton.Text == "DEG")
             {
                 preview2.Text += $"{whatAngle}₀({preview1.Text})";
-                holderAngle = Math.Round(GetAngleValue(whatAngle, double.Parse(preview1.Text) *
-                    (Math.PI / 180)), 11);
-                preview1.Text = holderAngle.ToString();
+                holderAngle = Math.Round(GetAngleValue(whatAngle, double.Parse(preview1.Text)));
+                preview1.Text = (holderAngle*(Math.PI/180)).ToString();
             }
             else if (angleButton.Text == "RAD")
             {
@@ -698,50 +793,76 @@ namespace Calculator
 
         private void sinButton_Click(object sender, EventArgs e)
         {
-            if (sinButton.Text == "sin")
-            {
-                AngleOperation("sin");
-            }
+            AngleOperation(sinButton.Text);
         }
 
         private void cosButton_Click(object sender, EventArgs e)
         {
-            if (cosButton.Text == "cos")
-            {
-                AngleOperation("cos");
-            }
+            AngleOperation(cosButton.Text);
         }
 
         private void tanButton_Click(object sender, EventArgs e)
         {
-            if (tanButton.Text == "tan")
-            {
-                AngleOperation("tan");
-            }
+            AngleOperation(tanButton.Text);
         }
 
         private void secButton_Click(object sender, EventArgs e)
         {
-            if (secButton.Text == "sec")
-            {
-                AngleOperation("sec");
-            }
+            AngleOperation(secButton.Text);
         }
 
         private void cscButton_Click(object sender, EventArgs e)
         {
-            if (cscButton.Text == "csc")
-            {
-                AngleOperation("csc");
-            }
+            AngleOperation(cscButton.Text);
         }
 
         private void cotButton_Click(object sender, EventArgs e)
         {
-            if (cotButton.Text == "cot")
+            AngleOperation(cotButton.Text);
+        }
+
+        private void xSquareSupport()
+        {
+            preview1.Text = newCalculated.ToString();
+            newVal = false;
+            squared = true;
+        }
+        private void xSquaredOtherSupport(double toThe = 2)
+        {
+            if (operation == "add")
             {
-                AngleOperation("cot");
+                newCalculated += Math.Pow(double.Parse(preview1.Text), 2);
+                preview2.Text += $" sqr({preview1.Text})";
+                xSquareSupport();
             }
+            else if (operation == "minus")
+            {
+                newCalculated -= Math.Pow(double.Parse(preview1.Text), 2);
+                preview2.Text += $" sqr({preview1.Text})";
+                xSquareSupport();
+            }
+            else if (operation == "divide")
+            {
+                newCalculated /= Math.Pow(double.Parse(preview1.Text), 2);
+                preview2.Text += $" sqr({preview1.Text})";
+                xSquareSupport();
+            }
+            else if (operation == "multiply")
+            {
+                newCalculated *= Math.Pow(double.Parse(preview1.Text), 2);
+                preview2.Text += $" sqr({preview1.Text})";
+                xSquareSupport();
+            }
+            else
+            {
+                preview2.Text += $"sqr({preview1.Text})";
+                newCalculated = Math.Pow(double.Parse(preview1.Text), 2);
+                xSquareSupport();
+            }
+        }
+        private void xSquaredButton_Click(object sender, EventArgs e)
+        {
+            xSquaredOtherSupport();
         }
     }
 }

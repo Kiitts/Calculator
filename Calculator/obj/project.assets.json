@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\Kitts Things 1-1\\5-1st sem\\OOP\\Assignment 2\\Calculator\\Calculator\\Calculator.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\Kitts Things 1-1\\5-1st sem\\OOP\\Calculator-master\\Calculator\\Calculator.csproj",
       "projectName": "Calculator",
-      "projectPath": "C:\\Users\\User\\Desktop\\Kitts Things 1-1\\5-1st sem\\OOP\\Assignment 2\\Calculator\\Calculator\\Calculator.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\Kitts Things 1-1\\5-1st sem\\OOP\\Calculator-master\\Calculator\\Calculator.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\Kitts Things 1-1\\5-1st sem\\OOP\\Assignment 2\\Calculator\\Calculator\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\Kitts Things 1-1\\5-1st sem\\OOP\\Calculator-master\\Calculator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

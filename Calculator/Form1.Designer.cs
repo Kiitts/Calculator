@@ -31,16 +31,10 @@ namespace Calculator
         {
             this.brandName = new System.Windows.Forms.Label();
             this.angleButton = new System.Windows.Forms.Button();
-            this.memoryClearButton = new System.Windows.Forms.Button();
-            this.memoryRecallButton = new System.Windows.Forms.Button();
             this.fixedToExpoButton = new System.Windows.Forms.Button();
-            this.memoryPlusButton = new System.Windows.Forms.Button();
-            this.memoryMinusButton = new System.Windows.Forms.Button();
-            this.memorySaveButton = new System.Windows.Forms.Button();
-            this.memoryArrowButton = new System.Windows.Forms.Button();
             this.changeTrigoButton = new System.Windows.Forms.Button();
             this.cotButton = new System.Windows.Forms.Button();
-            this.scsButton = new System.Windows.Forms.Button();
+            this.cscButton = new System.Windows.Forms.Button();
             this.secButton = new System.Windows.Forms.Button();
             this.hypButton = new System.Windows.Forms.Button();
             this.tanButton = new System.Windows.Forms.Button();
@@ -108,31 +102,6 @@ namespace Calculator
             this.angleButton.UseVisualStyleBackColor = false;
             this.angleButton.Click += new System.EventHandler(this.angleButton_Click);
             // 
-            // memoryClearButton
-            // 
-            this.memoryClearButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.memoryClearButton.Enabled = false;
-            this.memoryClearButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.memoryClearButton.Location = new System.Drawing.Point(13, 142);
-            this.memoryClearButton.Name = "memoryClearButton";
-            this.memoryClearButton.Size = new System.Drawing.Size(75, 23);
-            this.memoryClearButton.TabIndex = 4;
-            this.memoryClearButton.Text = "MC";
-            this.memoryClearButton.UseMnemonic = false;
-            this.memoryClearButton.UseVisualStyleBackColor = false;
-            // 
-            // memoryRecallButton
-            // 
-            this.memoryRecallButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.memoryRecallButton.Enabled = false;
-            this.memoryRecallButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.memoryRecallButton.Location = new System.Drawing.Point(94, 141);
-            this.memoryRecallButton.Name = "memoryRecallButton";
-            this.memoryRecallButton.Size = new System.Drawing.Size(75, 23);
-            this.memoryRecallButton.TabIndex = 5;
-            this.memoryRecallButton.Text = "MR";
-            this.memoryRecallButton.UseVisualStyleBackColor = false;
-            // 
             // fixedToExpoButton
             // 
             this.fixedToExpoButton.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -145,55 +114,6 @@ namespace Calculator
             this.fixedToExpoButton.Text = "F-E";
             this.fixedToExpoButton.UseVisualStyleBackColor = false;
             // 
-            // memoryPlusButton
-            // 
-            this.memoryPlusButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.memoryPlusButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.memoryPlusButton.Location = new System.Drawing.Point(175, 141);
-            this.memoryPlusButton.Name = "memoryPlusButton";
-            this.memoryPlusButton.Size = new System.Drawing.Size(75, 23);
-            this.memoryPlusButton.TabIndex = 7;
-            this.memoryPlusButton.Text = "M+";
-            this.memoryPlusButton.UseMnemonic = false;
-            this.memoryPlusButton.UseVisualStyleBackColor = false;
-            // 
-            // memoryMinusButton
-            // 
-            this.memoryMinusButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.memoryMinusButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.memoryMinusButton.Location = new System.Drawing.Point(256, 142);
-            this.memoryMinusButton.Name = "memoryMinusButton";
-            this.memoryMinusButton.Size = new System.Drawing.Size(75, 23);
-            this.memoryMinusButton.TabIndex = 8;
-            this.memoryMinusButton.Text = "M-";
-            this.memoryMinusButton.UseMnemonic = false;
-            this.memoryMinusButton.UseVisualStyleBackColor = false;
-            // 
-            // memorySaveButton
-            // 
-            this.memorySaveButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.memorySaveButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.memorySaveButton.Location = new System.Drawing.Point(337, 142);
-            this.memorySaveButton.Name = "memorySaveButton";
-            this.memorySaveButton.Size = new System.Drawing.Size(75, 23);
-            this.memorySaveButton.TabIndex = 9;
-            this.memorySaveButton.Text = "MS";
-            this.memorySaveButton.UseMnemonic = false;
-            this.memorySaveButton.UseVisualStyleBackColor = false;
-            // 
-            // memoryArrowButton
-            // 
-            this.memoryArrowButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.memoryArrowButton.Enabled = false;
-            this.memoryArrowButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.memoryArrowButton.Location = new System.Drawing.Point(418, 142);
-            this.memoryArrowButton.Name = "memoryArrowButton";
-            this.memoryArrowButton.Size = new System.Drawing.Size(75, 23);
-            this.memoryArrowButton.TabIndex = 10;
-            this.memoryArrowButton.Text = "M▼";
-            this.memoryArrowButton.UseMnemonic = false;
-            this.memoryArrowButton.UseVisualStyleBackColor = false;
-            // 
             // changeTrigoButton
             // 
             this.changeTrigoButton.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -201,7 +121,7 @@ namespace Calculator
             this.changeTrigoButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.changeTrigoButton.Location = new System.Drawing.Point(13, 171);
             this.changeTrigoButton.Name = "changeTrigoButton";
-            this.changeTrigoButton.Size = new System.Drawing.Size(75, 23);
+            this.changeTrigoButton.Size = new System.Drawing.Size(46, 23);
             this.changeTrigoButton.TabIndex = 11;
             this.changeTrigoButton.Text = "2nd";
             this.changeTrigoButton.UseVisualStyleBackColor = false;
@@ -212,24 +132,26 @@ namespace Calculator
             this.cotButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.cotButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cotButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.cotButton.Location = new System.Drawing.Point(439, 171);
+            this.cotButton.Location = new System.Drawing.Point(441, 171);
             this.cotButton.Name = "cotButton";
-            this.cotButton.Size = new System.Drawing.Size(52, 23);
+            this.cotButton.Size = new System.Drawing.Size(50, 23);
             this.cotButton.TabIndex = 19;
             this.cotButton.Text = "cot";
             this.cotButton.UseVisualStyleBackColor = false;
+            this.cotButton.Click += new System.EventHandler(this.cotButton_Click);
             // 
-            // scsButton
+            // cscButton
             // 
-            this.scsButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.scsButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.scsButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.scsButton.Location = new System.Drawing.Point(381, 171);
-            this.scsButton.Name = "scsButton";
-            this.scsButton.Size = new System.Drawing.Size(52, 23);
-            this.scsButton.TabIndex = 20;
-            this.scsButton.Text = "scs";
-            this.scsButton.UseVisualStyleBackColor = false;
+            this.cscButton.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.cscButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cscButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.cscButton.Location = new System.Drawing.Point(381, 171);
+            this.cscButton.Name = "cscButton";
+            this.cscButton.Size = new System.Drawing.Size(54, 23);
+            this.cscButton.TabIndex = 20;
+            this.cscButton.Text = "csc";
+            this.cscButton.UseVisualStyleBackColor = false;
+            this.cscButton.Click += new System.EventHandler(this.cscButton_Click);
             // 
             // secButton
             // 
@@ -242,6 +164,7 @@ namespace Calculator
             this.secButton.TabIndex = 21;
             this.secButton.Text = "sec";
             this.secButton.UseVisualStyleBackColor = false;
+            this.secButton.Click += new System.EventHandler(this.secButton_Click);
             // 
             // hypButton
             // 
@@ -254,42 +177,46 @@ namespace Calculator
             this.hypButton.TabIndex = 22;
             this.hypButton.Text = "hyp";
             this.hypButton.UseVisualStyleBackColor = false;
+            this.hypButton.Click += new System.EventHandler(this.hypButton_Click);
             // 
             // tanButton
             // 
             this.tanButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tanButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tanButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tanButton.Location = new System.Drawing.Point(207, 171);
+            this.tanButton.Location = new System.Drawing.Point(195, 171);
             this.tanButton.Name = "tanButton";
-            this.tanButton.Size = new System.Drawing.Size(52, 23);
+            this.tanButton.Size = new System.Drawing.Size(60, 23);
             this.tanButton.TabIndex = 23;
             this.tanButton.Text = "tan";
             this.tanButton.UseVisualStyleBackColor = false;
+            this.tanButton.Click += new System.EventHandler(this.tanButton_Click);
             // 
             // cosButton
             // 
             this.cosButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.cosButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cosButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.cosButton.Location = new System.Drawing.Point(149, 171);
+            this.cosButton.Location = new System.Drawing.Point(131, 171);
             this.cosButton.Name = "cosButton";
-            this.cosButton.Size = new System.Drawing.Size(52, 23);
+            this.cosButton.Size = new System.Drawing.Size(60, 23);
             this.cosButton.TabIndex = 24;
             this.cosButton.Text = "cos";
             this.cosButton.UseVisualStyleBackColor = false;
+            this.cosButton.Click += new System.EventHandler(this.cosButton_Click);
             // 
             // sinButton
             // 
             this.sinButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.sinButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.sinButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.sinButton.Location = new System.Drawing.Point(94, 171);
+            this.sinButton.Location = new System.Drawing.Point(65, 170);
             this.sinButton.Name = "sinButton";
-            this.sinButton.Size = new System.Drawing.Size(52, 23);
+            this.sinButton.Size = new System.Drawing.Size(60, 23);
             this.sinButton.TabIndex = 25;
             this.sinButton.Text = "sin";
             this.sinButton.UseVisualStyleBackColor = false;
+            this.sinButton.Click += new System.EventHandler(this.sinButton_Click);
             // 
             // xSquaredButton
             // 
@@ -300,8 +227,9 @@ namespace Calculator
             this.xSquaredButton.Name = "xSquaredButton";
             this.xSquaredButton.Size = new System.Drawing.Size(75, 23);
             this.xSquaredButton.TabIndex = 26;
-            this.xSquaredButton.Text = "x^2";
+            this.xSquaredButton.Text = "x²";
             this.xSquaredButton.UseVisualStyleBackColor = false;
+            this.xSquaredButton.Click += new System.EventHandler(this.xSquaredButton_Click);
             // 
             // squareRootButton
             // 
@@ -312,7 +240,7 @@ namespace Calculator
             this.squareRootButton.Name = "squareRootButton";
             this.squareRootButton.Size = new System.Drawing.Size(75, 23);
             this.squareRootButton.TabIndex = 27;
-            this.squareRootButton.Text = "2√x";
+            this.squareRootButton.Text = "√x";
             this.squareRootButton.UseVisualStyleBackColor = false;
             // 
             // exponentButton
@@ -770,16 +698,10 @@ namespace Calculator
             this.Controls.Add(this.tanButton);
             this.Controls.Add(this.hypButton);
             this.Controls.Add(this.secButton);
-            this.Controls.Add(this.scsButton);
+            this.Controls.Add(this.cscButton);
             this.Controls.Add(this.cotButton);
             this.Controls.Add(this.changeTrigoButton);
-            this.Controls.Add(this.memoryArrowButton);
-            this.Controls.Add(this.memorySaveButton);
-            this.Controls.Add(this.memoryMinusButton);
-            this.Controls.Add(this.memoryPlusButton);
             this.Controls.Add(this.fixedToExpoButton);
-            this.Controls.Add(this.memoryRecallButton);
-            this.Controls.Add(this.memoryClearButton);
             this.Controls.Add(this.angleButton);
             this.Controls.Add(this.brandName);
             this.MaximumSize = new System.Drawing.Size(519, 419);
@@ -796,16 +718,10 @@ namespace Calculator
 
         private System.Windows.Forms.Label brandName;
         private System.Windows.Forms.Button angleButton;
-        private System.Windows.Forms.Button memoryClearButton;
-        private System.Windows.Forms.Button memoryRecallButton;
         private System.Windows.Forms.Button fixedToExpoButton;
-        private System.Windows.Forms.Button memoryPlusButton;
-        private System.Windows.Forms.Button memoryMinusButton;
-        private System.Windows.Forms.Button memorySaveButton;
-        private System.Windows.Forms.Button memoryArrowButton;
         private System.Windows.Forms.Button changeTrigoButton;
         private System.Windows.Forms.Button cotButton;
-        private System.Windows.Forms.Button scsButton;
+        private System.Windows.Forms.Button cscButton;
         private System.Windows.Forms.Button secButton;
         private System.Windows.Forms.Button hypButton;
         private System.Windows.Forms.Button tanButton;
