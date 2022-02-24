@@ -31,7 +31,6 @@ namespace Calculator
         {
             this.brandName = new System.Windows.Forms.Label();
             this.angleButton = new System.Windows.Forms.Button();
-            this.fixedToExpoButton = new System.Windows.Forms.Button();
             this.changeTrigoButton = new System.Windows.Forms.Button();
             this.cotButton = new System.Windows.Forms.Button();
             this.cscButton = new System.Windows.Forms.Button();
@@ -42,14 +41,11 @@ namespace Calculator
             this.sinButton = new System.Windows.Forms.Button();
             this.xSquaredButton = new System.Windows.Forms.Button();
             this.squareRootButton = new System.Windows.Forms.Button();
-            this.exponentButton = new System.Windows.Forms.Button();
             this.exponentialTen = new System.Windows.Forms.Button();
             this.logButton = new System.Windows.Forms.Button();
             this.lnButton = new System.Windows.Forms.Button();
             this.buttonOverX = new System.Windows.Forms.Button();
             this.buttonAbsolute = new System.Windows.Forms.Button();
-            this.buttonExponential = new System.Windows.Forms.Button();
-            this.buttonModulus = new System.Windows.Forms.Button();
             this.buttonOpenParen = new System.Windows.Forms.Button();
             this.buttonCloseParen = new System.Windows.Forms.Button();
             this.buttonFactorial = new System.Windows.Forms.Button();
@@ -94,7 +90,7 @@ namespace Calculator
             this.angleButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.angleButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.angleButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.angleButton.Location = new System.Drawing.Point(13, 113);
+            this.angleButton.Location = new System.Drawing.Point(12, 171);
             this.angleButton.Name = "angleButton";
             this.angleButton.Size = new System.Drawing.Size(75, 23);
             this.angleButton.TabIndex = 2;
@@ -102,26 +98,14 @@ namespace Calculator
             this.angleButton.UseVisualStyleBackColor = false;
             this.angleButton.Click += new System.EventHandler(this.angleButton_Click);
             // 
-            // fixedToExpoButton
-            // 
-            this.fixedToExpoButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.fixedToExpoButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.fixedToExpoButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.fixedToExpoButton.Location = new System.Drawing.Point(94, 113);
-            this.fixedToExpoButton.Name = "fixedToExpoButton";
-            this.fixedToExpoButton.Size = new System.Drawing.Size(75, 23);
-            this.fixedToExpoButton.TabIndex = 6;
-            this.fixedToExpoButton.Text = "F-E";
-            this.fixedToExpoButton.UseVisualStyleBackColor = false;
-            // 
             // changeTrigoButton
             // 
             this.changeTrigoButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.changeTrigoButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.changeTrigoButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.changeTrigoButton.Location = new System.Drawing.Point(13, 171);
+            this.changeTrigoButton.Location = new System.Drawing.Point(13, 200);
             this.changeTrigoButton.Name = "changeTrigoButton";
-            this.changeTrigoButton.Size = new System.Drawing.Size(46, 23);
+            this.changeTrigoButton.Size = new System.Drawing.Size(74, 23);
             this.changeTrigoButton.TabIndex = 11;
             this.changeTrigoButton.Text = "2nd";
             this.changeTrigoButton.UseVisualStyleBackColor = false;
@@ -130,11 +114,11 @@ namespace Calculator
             // cotButton
             // 
             this.cotButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.cotButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cotButton.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cotButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.cotButton.Location = new System.Drawing.Point(441, 171);
+            this.cotButton.Location = new System.Drawing.Point(425, 200);
             this.cotButton.Name = "cotButton";
-            this.cotButton.Size = new System.Drawing.Size(50, 23);
+            this.cotButton.Size = new System.Drawing.Size(65, 23);
             this.cotButton.TabIndex = 19;
             this.cotButton.Text = "cot";
             this.cotButton.UseVisualStyleBackColor = false;
@@ -143,11 +127,11 @@ namespace Calculator
             // cscButton
             // 
             this.cscButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.cscButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cscButton.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cscButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.cscButton.Location = new System.Drawing.Point(381, 171);
+            this.cscButton.Location = new System.Drawing.Point(348, 200);
             this.cscButton.Name = "cscButton";
-            this.cscButton.Size = new System.Drawing.Size(54, 23);
+            this.cscButton.Size = new System.Drawing.Size(71, 23);
             this.cscButton.TabIndex = 20;
             this.cscButton.Text = "csc";
             this.cscButton.UseVisualStyleBackColor = false;
@@ -156,11 +140,11 @@ namespace Calculator
             // secButton
             // 
             this.secButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.secButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.secButton.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.secButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.secButton.Location = new System.Drawing.Point(323, 171);
+            this.secButton.Location = new System.Drawing.Point(275, 200);
             this.secButton.Name = "secButton";
-            this.secButton.Size = new System.Drawing.Size(52, 23);
+            this.secButton.Size = new System.Drawing.Size(67, 23);
             this.secButton.TabIndex = 21;
             this.secButton.Text = "sec";
             this.secButton.UseVisualStyleBackColor = false;
@@ -171,7 +155,7 @@ namespace Calculator
             this.hypButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.hypButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.hypButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.hypButton.Location = new System.Drawing.Point(265, 171);
+            this.hypButton.Location = new System.Drawing.Point(392, 171);
             this.hypButton.Name = "hypButton";
             this.hypButton.Size = new System.Drawing.Size(52, 23);
             this.hypButton.TabIndex = 22;
@@ -182,11 +166,11 @@ namespace Calculator
             // tanButton
             // 
             this.tanButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tanButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tanButton.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tanButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tanButton.Location = new System.Drawing.Point(195, 171);
+            this.tanButton.Location = new System.Drawing.Point(297, 171);
             this.tanButton.Name = "tanButton";
-            this.tanButton.Size = new System.Drawing.Size(60, 23);
+            this.tanButton.Size = new System.Drawing.Size(89, 23);
             this.tanButton.TabIndex = 23;
             this.tanButton.Text = "tan";
             this.tanButton.UseVisualStyleBackColor = false;
@@ -195,11 +179,11 @@ namespace Calculator
             // cosButton
             // 
             this.cosButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.cosButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cosButton.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cosButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.cosButton.Location = new System.Drawing.Point(131, 171);
+            this.cosButton.Location = new System.Drawing.Point(195, 171);
             this.cosButton.Name = "cosButton";
-            this.cosButton.Size = new System.Drawing.Size(60, 23);
+            this.cosButton.Size = new System.Drawing.Size(95, 23);
             this.cosButton.TabIndex = 24;
             this.cosButton.Text = "cos";
             this.cosButton.UseVisualStyleBackColor = false;
@@ -208,11 +192,11 @@ namespace Calculator
             // sinButton
             // 
             this.sinButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.sinButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.sinButton.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.sinButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.sinButton.Location = new System.Drawing.Point(65, 170);
+            this.sinButton.Location = new System.Drawing.Point(94, 171);
             this.sinButton.Name = "sinButton";
-            this.sinButton.Size = new System.Drawing.Size(60, 23);
+            this.sinButton.Size = new System.Drawing.Size(95, 23);
             this.sinButton.TabIndex = 25;
             this.sinButton.Text = "sin";
             this.sinButton.UseVisualStyleBackColor = false;
@@ -223,7 +207,7 @@ namespace Calculator
             this.xSquaredButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.xSquaredButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.xSquaredButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.xSquaredButton.Location = new System.Drawing.Point(13, 200);
+            this.xSquaredButton.Location = new System.Drawing.Point(13, 229);
             this.xSquaredButton.Name = "xSquaredButton";
             this.xSquaredButton.Size = new System.Drawing.Size(75, 23);
             this.xSquaredButton.TabIndex = 26;
@@ -236,24 +220,13 @@ namespace Calculator
             this.squareRootButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.squareRootButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.squareRootButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.squareRootButton.Location = new System.Drawing.Point(12, 229);
+            this.squareRootButton.Location = new System.Drawing.Point(13, 258);
             this.squareRootButton.Name = "squareRootButton";
             this.squareRootButton.Size = new System.Drawing.Size(75, 23);
             this.squareRootButton.TabIndex = 27;
             this.squareRootButton.Text = "√x";
             this.squareRootButton.UseVisualStyleBackColor = false;
-            // 
-            // exponentButton
-            // 
-            this.exponentButton.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.exponentButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.exponentButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.exponentButton.Location = new System.Drawing.Point(12, 258);
-            this.exponentButton.Name = "exponentButton";
-            this.exponentButton.Size = new System.Drawing.Size(75, 23);
-            this.exponentButton.TabIndex = 28;
-            this.exponentButton.Text = "x^y";
-            this.exponentButton.UseVisualStyleBackColor = false;
+            this.squareRootButton.Click += new System.EventHandler(this.squareRootButton_Click);
             // 
             // exponentialTen
             // 
@@ -266,6 +239,7 @@ namespace Calculator
             this.exponentialTen.TabIndex = 29;
             this.exponentialTen.Text = "10^x";
             this.exponentialTen.UseVisualStyleBackColor = false;
+            this.exponentialTen.Click += new System.EventHandler(this.exponentialTen_Click);
             // 
             // logButton
             // 
@@ -278,6 +252,7 @@ namespace Calculator
             this.logButton.TabIndex = 30;
             this.logButton.Text = "log";
             this.logButton.UseVisualStyleBackColor = false;
+            this.logButton.Click += new System.EventHandler(this.logButton_Click);
             // 
             // lnButton
             // 
@@ -290,6 +265,7 @@ namespace Calculator
             this.lnButton.TabIndex = 31;
             this.lnButton.Text = "ln";
             this.lnButton.UseVisualStyleBackColor = false;
+            this.lnButton.Click += new System.EventHandler(this.lnButton_Click);
             // 
             // buttonOverX
             // 
@@ -314,30 +290,7 @@ namespace Calculator
             this.buttonAbsolute.TabIndex = 33;
             this.buttonAbsolute.Text = "|x|";
             this.buttonAbsolute.UseVisualStyleBackColor = false;
-            // 
-            // buttonExponential
-            // 
-            this.buttonExponential.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.buttonExponential.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonExponential.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonExponential.Location = new System.Drawing.Point(275, 200);
-            this.buttonExponential.Name = "buttonExponential";
-            this.buttonExponential.Size = new System.Drawing.Size(100, 23);
-            this.buttonExponential.TabIndex = 34;
-            this.buttonExponential.Text = "exp";
-            this.buttonExponential.UseVisualStyleBackColor = false;
-            // 
-            // buttonModulus
-            // 
-            this.buttonModulus.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.buttonModulus.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonModulus.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonModulus.Location = new System.Drawing.Point(381, 200);
-            this.buttonModulus.Name = "buttonModulus";
-            this.buttonModulus.Size = new System.Drawing.Size(110, 23);
-            this.buttonModulus.TabIndex = 35;
-            this.buttonModulus.Text = "mod";
-            this.buttonModulus.UseVisualStyleBackColor = false;
+            this.buttonAbsolute.Click += new System.EventHandler(this.buttonAbsolute_Click);
             // 
             // buttonOpenParen
             // 
@@ -370,12 +323,13 @@ namespace Calculator
             this.buttonFactorial.BackColor = System.Drawing.SystemColors.ControlDark;
             this.buttonFactorial.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonFactorial.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonFactorial.Location = new System.Drawing.Point(296, 229);
+            this.buttonFactorial.Location = new System.Drawing.Point(297, 229);
             this.buttonFactorial.Name = "buttonFactorial";
             this.buttonFactorial.Size = new System.Drawing.Size(95, 23);
             this.buttonFactorial.TabIndex = 38;
             this.buttonFactorial.Text = "n!";
             this.buttonFactorial.UseVisualStyleBackColor = false;
+            this.buttonFactorial.Click += new System.EventHandler(this.buttonFactorial_Click);
             // 
             // buttonDivide
             // 
@@ -633,9 +587,9 @@ namespace Calculator
             this.eraseButton.BackColor = System.Drawing.SystemColors.ControlDark;
             this.eraseButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.eraseButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.eraseButton.Location = new System.Drawing.Point(337, 113);
+            this.eraseButton.Location = new System.Drawing.Point(450, 171);
             this.eraseButton.Name = "eraseButton";
-            this.eraseButton.Size = new System.Drawing.Size(75, 23);
+            this.eraseButton.Size = new System.Drawing.Size(41, 23);
             this.eraseButton.TabIndex = 57;
             this.eraseButton.Text = "<--";
             this.eraseButton.UseVisualStyleBackColor = false;
@@ -683,14 +637,11 @@ namespace Calculator
             this.Controls.Add(this.buttonFactorial);
             this.Controls.Add(this.buttonCloseParen);
             this.Controls.Add(this.buttonOpenParen);
-            this.Controls.Add(this.buttonModulus);
-            this.Controls.Add(this.buttonExponential);
             this.Controls.Add(this.buttonAbsolute);
             this.Controls.Add(this.buttonOverX);
             this.Controls.Add(this.lnButton);
             this.Controls.Add(this.logButton);
             this.Controls.Add(this.exponentialTen);
-            this.Controls.Add(this.exponentButton);
             this.Controls.Add(this.squareRootButton);
             this.Controls.Add(this.xSquaredButton);
             this.Controls.Add(this.sinButton);
@@ -701,7 +652,6 @@ namespace Calculator
             this.Controls.Add(this.cscButton);
             this.Controls.Add(this.cotButton);
             this.Controls.Add(this.changeTrigoButton);
-            this.Controls.Add(this.fixedToExpoButton);
             this.Controls.Add(this.angleButton);
             this.Controls.Add(this.brandName);
             this.MaximumSize = new System.Drawing.Size(519, 419);
@@ -718,7 +668,6 @@ namespace Calculator
 
         private System.Windows.Forms.Label brandName;
         private System.Windows.Forms.Button angleButton;
-        private System.Windows.Forms.Button fixedToExpoButton;
         private System.Windows.Forms.Button changeTrigoButton;
         private System.Windows.Forms.Button cotButton;
         private System.Windows.Forms.Button cscButton;
@@ -729,14 +678,11 @@ namespace Calculator
         private System.Windows.Forms.Button sinButton;
         private System.Windows.Forms.Button xSquaredButton;
         private System.Windows.Forms.Button squareRootButton;
-        private System.Windows.Forms.Button exponentButton;
         private System.Windows.Forms.Button exponentialTen;
         private System.Windows.Forms.Button logButton;
         private System.Windows.Forms.Button lnButton;
         private System.Windows.Forms.Button buttonOverX;
         private System.Windows.Forms.Button buttonAbsolute;
-        private System.Windows.Forms.Button buttonExponential;
-        private System.Windows.Forms.Button buttonModulus;
         private System.Windows.Forms.Button buttonOpenParen;
         private System.Windows.Forms.Button buttonCloseParen;
         private System.Windows.Forms.Button buttonFactorial;

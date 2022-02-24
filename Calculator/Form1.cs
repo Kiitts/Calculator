@@ -17,6 +17,11 @@ namespace Calculator
         public bool equalAgain = false;
         public bool alreadyPreview2 = false;
         public bool squared = false;
+        public bool abs = false;
+        public bool fact = false;
+        public bool sqrt = false;
+        public bool squared10 = false;
+        public bool log = false;
         public string previewHolder = string.Empty;
         public string operation = string.Empty;
         public string preview2Holder = string.Empty;
@@ -160,8 +165,6 @@ namespace Calculator
                 {
                     buttons[i].Text = buttons[i].Text.Remove(buttons[i].Text.Length - 2);
                 }
-                xSquaredButton.Text = "x²"; squareRootButton.Text = "√x"; exponentButton.Text = "x^y";
-                exponentialTen.Text = "10^x"; logButton.Text = "log"; lnButton.Text = "ln";
             }
             else
             {
@@ -169,8 +172,6 @@ namespace Calculator
                 {
                     buttons[i].Text += "⁻¹";
                 }
-                xSquaredButton.Text = "x³"; squareRootButton.Text = "³√x"; exponentButton.Text = "y√x";
-                exponentialTen.Text = "2^x"; logButton.Text = "logᵧx"; lnButton.Text = "e^x";
             }
         }
 
@@ -439,16 +440,37 @@ namespace Calculator
         private void buttonEqual_Click(object sender, EventArgs e)
         {
             //equal the function
-            if(squared)
+            if(squared || abs || fact || sqrt || squared10 || log)
             {
-                if (!equalAgain)
+
+                if (abs || fact || sqrt || squared10 || log)
                 {
-                    AfterEqual();
+                    if (!equalAgain)
+                    {
+                        preview2.Text += " =";
+                        abs = false;
+                        fact = false;
+                        sqrt = false;
+                        squared10 = false;
+                        log = false;
+                    }
+                    else
+                    {
+                        preview2.Text = preview1.Text + " =";
+                        preview1.Text = newCalculated.ToString();
+                    }
                 }
-                else
+                else if (squared)
                 {
-                    preview2.Text = preview1.Text + " =";
-                    preview1.Text = newCalculated.ToString();
+                    if (!equalAgain)
+                    {
+                        AfterEqual();
+                    }
+                    else
+                    {
+                        preview2.Text = preview1.Text + " =";
+                        preview1.Text = newCalculated.ToString();
+                    }
                 }
             }
             else if (operation == "add")
@@ -557,9 +579,9 @@ namespace Calculator
             Button[] buttons = new Button[] {angleButton, button0, button1, button2, button3, button4,
             button5, button6, button7, button8, button9, eraseButton, changeTrigoButton, sinButton,
             cosButton, tanButton, secButton, cscButton, hypButton, cosButton, xSquaredButton, buttonOverX,
-            buttonAbsolute, buttonExponential, buttonModulus, squareRootButton, buttonOpenParen,
+            buttonAbsolute, squareRootButton, buttonOpenParen,
             buttonCloseParen, buttonFactorial, buttonDivide, buttonMultiply, buttonAddition, buttonSubtract,
-            buttonEqual, exponentButton, exponentialTen,logButton, lnButton, buttonNegativePositive,
+            buttonEqual, exponentialTen,logButton, lnButton, buttonNegativePositive,
             buttonDot};
 
             if (preview1.Text != "0")
@@ -863,6 +885,230 @@ namespace Calculator
         private void xSquaredButton_Click(object sender, EventArgs e)
         {
             xSquaredOtherSupport();
+        }
+
+        private void AbsoluteSupport()
+        {
+            preview2.Text += $" |{preview1.Text}|";
+            preview1.Text = newCalculated.ToString();
+        }
+        private void buttonAbsolute_Click(object sender, EventArgs e)
+        {
+            double hold = 0;
+            if(double.Parse(preview1.Text) < 0)
+            {
+                hold = double.Parse(preview1.Text) * -1;
+            }
+            else
+            {
+                hold = double.Parse(preview1.Text);
+            }
+            switch(operation)
+            {
+                case "add":
+                    newCalculated += hold;
+                    AbsoluteSupport();
+                    break;
+                case "minus":
+                    newCalculated -= hold;
+                    AbsoluteSupport();
+                    break;
+                case "multiply":
+                    newCalculated *= hold;
+                    AbsoluteSupport();
+                    break;
+                case "divide":
+                    newCalculated /= hold;
+                    AbsoluteSupport();
+                    break;
+                default:
+                    newCalculated = hold;
+                    AbsoluteSupport();
+                    break;
+            }
+            abs = true;
+        }
+        private double Factorial(double n)
+        {
+            if (n == 1)
+            {
+                return n;
+            }
+            else if(n < 1)
+            {
+                return Math.Acos(5);
+            }
+            else
+            {
+                return n * Factorial(n - 1);
+            }
+        }
+
+        private void FactorialSupport()
+        {
+            preview2.Text += $" fact({preview1.Text})";
+            preview1.Text = newCalculated.ToString();
+        }
+        private void buttonFactorial_Click(object sender, EventArgs e)
+        {
+            double hold = Factorial(double.Parse(preview1.Text));
+            switch (operation)
+            {
+                case "add":
+                    newCalculated += hold;
+                    FactorialSupport();
+                    break;
+                case "minus":
+                    newCalculated -= hold;
+                    FactorialSupport();
+                    break;
+                case "multiply":
+                    newCalculated *= hold;
+                    FactorialSupport();
+                    break;
+                case "divide":
+                    newCalculated /= hold;
+                    FactorialSupport();
+                    break;
+                default:
+                    newCalculated = hold;
+                    FactorialSupport();
+                    break;
+            }
+        }
+
+        private void SqrtSupport()
+        {
+            preview2.Text += $" √({preview1.Text})";
+            preview1.Text = newCalculated.ToString();
+        }
+        private void squareRootButton_Click(object sender, EventArgs e)
+        {
+            double hold = Math.Sqrt(double.Parse(preview1.Text));
+            switch (operation)
+            {
+                case "add":
+                    newCalculated += hold;
+                    SqrtSupport();
+                    break;
+                case "minus":
+                    newCalculated -= hold;
+                    SqrtSupport();
+                    break;
+                case "multiply":
+                    newCalculated *= hold;
+                    SqrtSupport();
+                    break;
+                case "divide":
+                    newCalculated /= hold;
+                    SqrtSupport();
+                    break;
+                default:
+                    newCalculated = hold;
+                    SqrtSupport();
+                    break;
+            }
+            sqrt = true;
+        }
+
+        private void Sqr10Support()
+        {
+            preview2.Text += $" 10^{preview1.Text}";
+            preview1.Text = newCalculated.ToString();
+        }
+        private void exponentialTen_Click(object sender, EventArgs e)
+        {
+            double hold = Math.Pow(10, double.Parse(preview1.Text));
+            switch (operation)
+            {
+                case "add":
+                    newCalculated += hold;
+                    Sqr10Support();
+                    break;
+                case "minus":
+                    newCalculated -= hold;
+                    Sqr10Support();
+                    break;
+                case "multiply":
+                    newCalculated *= hold;
+                    Sqr10Support();
+                    break;
+                case "divide":
+                    newCalculated /= hold;
+                    Sqr10Support();
+                    break;
+                default:
+                    newCalculated = hold;
+                    Sqr10Support();
+                    break;
+            }
+            squared10 = true;
+        }
+
+        private void LogSupport()
+        {
+            preview2.Text += $" log({preview1.Text})";
+            preview1.Text = newCalculated.ToString();
+        }
+        private void logButton_Click(object sender, EventArgs e)
+        {
+            double hold = Math.Log(double.Parse(preview1.Text), 10);
+            switch (operation)
+            {
+                case "add":
+                    newCalculated += hold;
+                    LogSupport();
+                    break;
+                case "minus":
+                    newCalculated -= hold;
+                    LogSupport();
+                    break;
+                case "multiply":
+                    newCalculated *= hold;
+                    LogSupport();
+                    break;
+                case "divide":
+                    newCalculated /= hold;
+                    LogSupport();
+                    break;
+                default:
+                    newCalculated = hold;
+                    LogSupport();
+                    break;
+            }
+            log = true;
+        }
+        private void LNSupport()
+        {
+            preview2.Text += $" log({preview1.Text})";
+            preview1.Text = newCalculated.ToString();
+        }
+        private void lnButton_Click(object sender, EventArgs e)
+        {
+            double hold = Math.Log(double.Parse(preview1.Text));
+            switch (operation)
+            {
+                case "add":
+                    newCalculated += hold;
+                    LNSupport();
+                    break;
+                case "minus":
+                    newCalculated -= hold;
+                    LNSupport();
+                    break;
+                case "multiply":
+                    newCalculated *= hold;
+                    LNSupport();
+                    break;
+                case "divide":
+                    newCalculated /= hold;
+                    LNSupport();
+                    break;
+                default:
+                    newCalculated = hold;
+                    LNSupport();
+                    break;
+            }
         }
     }
 }
