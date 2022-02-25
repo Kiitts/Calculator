@@ -127,14 +127,7 @@ namespace Calculator
                 {
                     for (int i = 0; i < buttons.Length; i++)
                     {
-                        if (i < 3)
-                        {
-                            buttons[i].Text = buttons[i].Text.Remove(buttons[i].Text.Length - 2) + "h⁻¹";
-                        }
-                        else
-                        {
-                            buttons[i].Text += "h";
-                        }
+                        buttons[i].Text = buttons[i].Text.Remove(buttons[i].Text.Length - 2) + "h⁻¹";
                     }
                 }
                 else
